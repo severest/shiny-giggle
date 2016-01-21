@@ -1,0 +1,35 @@
+{
+  "name": "shiny-giggle",
+  "version": "1.0.0",
+  "description": "experimentation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node server"
+  },
+  "author": "Sean Everest",
+  "license": "ISC",
+  "dependencies": {
+    "babel-core": "^6.4.5",
+    "babel-loader": "^6.2.1",
+    "css-loader": "^0.23.1",
+    "eslint": "^1.10.3",
+    "eslint-loader": "^1.2.0",
+    "express": "^4.13.3",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.8.5",
+    "html-webpack-plugin": "^2.7.1",
+    "http-proxy": "^1.12.0",
+    "node-sass": "^3.4.2",
+    "opn": "^4.0.0",
+    "sass-loader": "^3.1.2",
+    "style-loader": "^0.13.0",
+    "three": "^0.73.2",
+    "url-loader": "^0.5.7",
+    "webpack": "^1.12.11",
+    "webpack-dev-server": "^1.14.1"
+  },
+  "vendors": [
+    "three"
+  ]
+}

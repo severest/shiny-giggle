@@ -35,7 +35,10 @@ var config = {
             {
                 test: /\.js(x)?$/,
                 loader: 'babel',
-                exclude: nodeModulesPath
+                exclude: nodeModulesPath,
+                query: {
+                     presets: ['es2015']
+                 }
             },
             {
                 test: /\.(css|scss)$/,

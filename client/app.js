@@ -1,6 +1,7 @@
 import Scene from './scene';
 import Camera from './camera';
 import Cube from './cube';
+import Material from './material';
 
 var dat = require('dat-gui');
 var CANNON = require('cannon');
@@ -23,26 +24,59 @@ var gui = new dat.GUI();
 // };
 // render();
 
-var world, mass, body, shape, timeStep=1/60, scene, renderer, geometry, material, mesh;
+var world,scene,mesh,renderer,timeStep=1/60;//, mass, body, shape, timeStep=1/60, scene, renderer, geometry, material, mesh;
 
 let camera = new Camera();
+let boxes = [];
 
 function initCannon() {
   world = new CANNON.World();
-  world.gravity.set(0,-1,0);
+  world.gravity.set(0,-2,0);
   world.broadphase = new CANNON.NaiveBroadphase();
   world.solver.iterations = 10;
 
   scene = new Scene(gui);
   scene.scene.add( camera.obj );
 
-
-  //  body.angularVelocity.set(0,10,10);
-  //  body.angularDamping = 0.5;
-
-  mesh = new Cube(gui);
+  var folder = gui.addFolder('CubeMaterial');
+  var material = new Material(folder);
+  mesh = new Cube(material);
+  boxes.push(mesh);
+  mesh.cannon_body.position.set(0,5,0);
   world.addBody(mesh.cannon_body);
   scene.scene.add( mesh.obj );
+
+  mesh = new Cube(material);
+  boxes.push(mesh);
+  mesh.cannon_body.position.set(2.2,5,0);
+  world.addBody(mesh.cannon_body);
+  scene.scene.add( mesh.obj );
+
+  mesh = new Cube(material);
+  boxes.push(mesh);
+  mesh.cannon_body.position.set(4.4,5,0);
+  world.addBody(mesh.cannon_body);
+  scene.scene.add( mesh.obj );
+
+  mesh = new Cube(material);
+  boxes.push(mesh);
+  mesh.cannon_body.position.set(0,5,-2.2);
+  world.addBody(mesh.cannon_body);
+  scene.scene.add( mesh.obj );
+
+  mesh = new Cube(material);
+  boxes.push(mesh);
+  mesh.cannon_body.position.set(2.2,5,-2.2);
+  world.addBody(mesh.cannon_body);
+  scene.scene.add( mesh.obj );
+
+  mesh = new Cube(material);
+  boxes.push(mesh);
+  mesh.cannon_body.position.set(4.4,5,-2.2);
+  world.addBody(mesh.cannon_body);
+  scene.scene.add( mesh.obj );
+
+
 
   var groundShape = new CANNON.Plane();
   var groundBody = new CANNON.Body({ mass: 0 });
@@ -58,8 +92,10 @@ function updatePhysics() {
   // Step the physics world
   world.step(timeStep);
   // Copy coordinates from Cannon.js to Three.js
-  mesh.obj.position.copy(mesh.cannon_body.position);
-  mesh.obj.quaternion.copy(mesh.cannon_body.quaternion);
+  for (let i=0; i < boxes.length; i++) {
+    boxes[i].obj.position.copy(boxes[i].cannon_body.position);
+    boxes[i].obj.quaternion.copy(boxes[i].cannon_body.quaternion);
+  }
 }
 function render() {
   renderer.render( scene.scene, camera.obj );

@@ -31,7 +31,7 @@ let boxes = [];
 
 function initCannon() {
   world = new CANNON.World();
-  world.gravity.set(0,-2,0);
+  world.gravity.set(0,-10,0);
   world.broadphase = new CANNON.NaiveBroadphase();
   world.solver.iterations = 10;
 
@@ -40,42 +40,16 @@ function initCannon() {
 
   var folder = gui.addFolder('CubeMaterial');
   var material = new Material(folder);
-  mesh = new Cube(material);
-  boxes.push(mesh);
-  mesh.cannon_body.position.set(0,5,0);
-  world.addBody(mesh.cannon_body);
-  scene.scene.add( mesh.obj );
-
-  mesh = new Cube(material);
-  boxes.push(mesh);
-  mesh.cannon_body.position.set(2.2,5,0);
-  world.addBody(mesh.cannon_body);
-  scene.scene.add( mesh.obj );
-
-  mesh = new Cube(material);
-  boxes.push(mesh);
-  mesh.cannon_body.position.set(4.4,5,0);
-  world.addBody(mesh.cannon_body);
-  scene.scene.add( mesh.obj );
-
-  mesh = new Cube(material);
-  boxes.push(mesh);
-  mesh.cannon_body.position.set(0,5,-2.2);
-  world.addBody(mesh.cannon_body);
-  scene.scene.add( mesh.obj );
-
-  mesh = new Cube(material);
-  boxes.push(mesh);
-  mesh.cannon_body.position.set(2.2,5,-2.2);
-  world.addBody(mesh.cannon_body);
-  scene.scene.add( mesh.obj );
-
-  mesh = new Cube(material);
-  boxes.push(mesh);
-  mesh.cannon_body.position.set(4.4,5,-2.2);
-  world.addBody(mesh.cannon_body);
-  scene.scene.add( mesh.obj );
-
+  var grid = 7;
+  for (let x=-grid; x < grid; x++) {
+    for (let y=-grid; y < grid; y++) {
+      mesh = new Cube(material);
+      boxes.push(mesh);
+      mesh.cannon_body.position.set((x*2.3),1,(y*2.3));
+      world.addBody(mesh.cannon_body);
+      scene.scene.add( mesh.obj );
+    }
+  }
 
 
   var groundShape = new CANNON.Plane();

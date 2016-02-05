@@ -18,6 +18,6 @@ export default class Cube {
 
   jumpBox() {
     // this.cannon_body.applyLocalImpulse(new CANNON.Vec3(0,2,0),new CANNON.Vec3(0,0,0));
-    this.cannon_body.position.y = 5;
+    this.cannon_body.velocity.set(0,3,0);
   }
 }

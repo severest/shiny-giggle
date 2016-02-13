@@ -13,7 +13,7 @@ export default class Cube {
      mass: 1
     });
     this.cannon_body.addShape(this.shape);
-    setInterval(this.jumpBox.bind(this), (Math.random() * 2000) + 1000);
+    // setInterval(this.jumpBox.bind(this), (Math.random() * 2000) + 1000);
   }
 
   jumpBox() {

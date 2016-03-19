@@ -8,6 +8,7 @@ export default class Material {
       emissive : this.material.emissive.getHex(),
       specular : this.material.specular.getHex()
     };
+    this.material.shininess = 7;
 
     folder.addColor( data, 'color' ).onChange( this.handleColorChange( this.material.color ) );
     folder.addColor( data, 'emissive' ).onChange( this.handleColorChange( this.material.emissive ) );

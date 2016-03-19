@@ -7,7 +7,7 @@ var dat = require('dat-gui');
 var CANNON = require('cannon');
 var THREE = require('three');
 var Stats = require('stats.js');
-var trackball = require('./trackball');
+var Trackball = require('./trackball');
 
 var gui = new dat.GUI();
 
@@ -36,7 +36,7 @@ function initCannon() {
 
   var folder = gui.addFolder('CubeMaterial');
   var material = new Material(folder);
-  var grid = 6;
+  var grid = 7;
   for (let x=-grid; x < grid; x++) {
     for (let y=-grid; y < grid; y++) {
       mesh = new Cube(material);
@@ -59,7 +59,7 @@ function initCannon() {
   document.body.appendChild( renderer.domElement );
 
   // Trackball controls
-  controls = new trackball( camera.obj, renderer.domElement );
+  controls = new Trackball( camera.obj, renderer.domElement );
   controls.rotateSpeed = 1.0;
   controls.zoomSpeed = 1.2;
   controls.panSpeed = 0.2;
@@ -80,8 +80,9 @@ function updatePhysics() {
   // Copy coordinates from Cannon.js to Three.js
   for (let i=0; i < boxes.length; i++) {
     if ((Math.random() * 2000) > 1990) {
-        boxes[i].jumpBox();
+      boxes[i].jumpBox();
     }
+    boxes[i].moveBox();
     boxes[i].obj.position.copy(boxes[i].cannon_body.position);
     boxes[i].obj.quaternion.copy(boxes[i].cannon_body.quaternion);
   }

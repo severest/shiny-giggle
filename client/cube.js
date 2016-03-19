@@ -10,14 +10,22 @@ export default class Cube {
     //cannon
     this.shape = new CANNON.Box(new CANNON.Vec3(0.5,0.5,0.5));
     this.cannon_body = new CANNON.Body({
-     mass: 1
+     mass: 1,
+     fixedRotation: true
     });
     this.cannon_body.addShape(this.shape);
-    // setInterval(this.jumpBox.bind(this), (Math.random() * 2000) + 1000);
   }
 
   jumpBox() {
-    // this.cannon_body.applyLocalImpulse(new CANNON.Vec3(0,2,0),new CANNON.Vec3(0,0,0));
     this.cannon_body.velocity.set(0,3,0);
+  }
+
+  moveBox() {
+    var p = this.cannon_body.position;
+    if (p.x < 12.6) {
+      this.cannon_body.position.set(p.x+0.06,p.y,p.z);
+    } else {
+      this.cannon_body.position.set((-8*2.1),p.y,p.z);
+    }
   }
 }

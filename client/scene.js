@@ -4,14 +4,14 @@ export default class Scene {
 
     constructor(gui) {
       var data = {
-        x : 0,
-        y : -1,
+        x : -1,
+        y : 1,
         z : 0.6
       };
-      var folder = gui.addFolder('DirectionalLight');
-      folder.add( data, 'x', -1.0, 1.0);
-      folder.add( data, 'y', -1.0, 1.0);
-      folder.add( data, 'z', -1.0, 1.0);
+      // var folder = gui.addFolder('DirectionalLight');
+      // folder.add( data, 'x', -1.0, 1.0);
+      // folder.add( data, 'y', -1.0, 1.0);
+      // folder.add( data, 'z', -1.0, 1.0);
 
       this.scene = new THREE.Scene();
       this.dirLight = new THREE.DirectionalLight( 0xffffff, 1 );

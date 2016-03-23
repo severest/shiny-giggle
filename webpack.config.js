@@ -56,12 +56,12 @@ var config = {
     },
     plugins: [
         new Webpack.HotModuleReplacementPlugin(),
-        /*new Webpack.ProvidePlugin({
+        new Webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery',
             'window.jQuery': 'jquery',
             'root.jQuery': 'jquery'
-        }),*/
+        }),
         new Webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.bundle.js', Infinity),
         new Webpack.NoErrorsPlugin()
     ],

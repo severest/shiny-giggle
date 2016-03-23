@@ -1,15 +1,19 @@
 import THREE from 'three';
+import GUI from './gui';
+import config from './config';
 
 export default class Material {
-  constructor(folder) {
-    this.material = new THREE.MeshPhongMaterial( { color: 0xcc0000 } );
+  constructor() {
+    this.material = new THREE.MeshPhongMaterial({ color: config.material.colour });
     var data = {
       color : this.material.color.getHex(),
       emissive : this.material.emissive.getHex(),
       specular : this.material.specular.getHex()
     };
-    this.material.shininess = 7;
+    this.material.shininess = config.material.shinyness;
 
+    let gui = new GUI();
+    var folder = gui.gui.addFolder('CubeMaterial');
     folder.addColor( data, 'color' ).onChange( this.handleColorChange( this.material.color ) );
     folder.addColor( data, 'emissive' ).onChange( this.handleColorChange( this.material.emissive ) );
     folder.addColor( data, 'specular' ).onChange( this.handleColorChange( this.material.specular ) );

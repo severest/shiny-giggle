@@ -337,6 +337,9 @@ THREE.TrackballControls = function ( object, domElement ) {
 
         }
 
+        console.log(_this.object.position);
+        console.log(_this.target);
+
     };
 
     this.reset = function () {

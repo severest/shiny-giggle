@@ -5,7 +5,7 @@ import moment from 'moment';
 import CANNON from 'cannon';
 import THREE from 'three';
 import Stats from 'stats.js';
-import purl from 'purl';
+import uri from 'urijs';
 
 import Trackball from './trackball';
 import Scene from './scene';
@@ -28,6 +28,8 @@ var world,scene,mesh,renderer,timeStep=1/60,controls;//, mass, body, shape, time
 let camera = new Camera();
 let boxes = [];
 
+let params = uri().search(true);
+
 function initCannon() {
   world = new CANNON.World();
   world.gravity.set(0,-10,0);
@@ -40,7 +42,14 @@ function initCannon() {
   scene.scene.add( camera.obj );
 
 
-  var material = new Material();
+  var material;
+  if (params.colour !== undefined) {
+    material = new Material('#'+params.colour);
+  } else if (params.color !== undefined) {
+    material = new Material('#'+params.color);
+  } else {
+    material = new Material();
+  }
   var grid = config.GRID_SIZE;
   for (let x=-grid; x < grid; x++) {
     for (let y=-grid; y < grid; y++) {
@@ -116,5 +125,3 @@ setInterval(function () {
   $('#clock').html(moment().format('h:mm:ss a'));
   $('#clock').fitText(0.8);
 }, 1000);
-
-console.log(purl());

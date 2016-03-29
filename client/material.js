@@ -3,8 +3,12 @@ import GUI from './gui';
 import config from './config';
 
 export default class Material {
-  constructor() {
-    this.material = new THREE.MeshPhongMaterial({ color: config.material.colour });
+  constructor(colour) {
+    if (colour === undefined) {
+      colour = config.material.colour;
+    }
+    console.log(colour);
+    this.material = new THREE.MeshPhongMaterial({ color: colour });
     var data = {
       color : this.material.color.getHex(),
       emissive : this.material.emissive.getHex(),
